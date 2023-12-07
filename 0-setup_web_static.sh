@@ -1,38 +1,27 @@
 #!/usr/bin/env bash
-# Set the web server for deployment of web_static.
+# prepare your web servers
 
-apt-get update
-apt-get install -y nginx
+## Update server
+sudo apt-get -y update
+sudo apt-get -y upgrade
 
-mkdir -p /data/web_static/releases/test/
-mkdir -p /data/web_static/shared/
-echo "Holberton School" > /data/web_static/releases/test/index.html
-ln -sf /data/web_static/releases/test/ /data/web_static/current
+## Install NGINX
+sudo apt-get -y install nginx
 
-chown -R ubuntu /data/
-chgrp -R ubuntu /data/
+## Creates directories
+sudo mkdir -p /data/web_static/shared /data/web_static/releases/test
 
-printf %s "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    add_header X-Served-By $HOSTNAME;
-    root   /var/www/html;
-    index  index.html index.htm;
+## Write Hello World in index with tee command
+echo "Hello World" | sudo tee /data/web_static/releases/test/index.html
 
-    location /hbnb_static {
-        alias /data/web_static/current;
-        index index.html index.htm;
-    }
+## Create Symbolic link
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-    location /redirect_me {
-        return 301 http://cuberule.com/;
-    }
+## Change owner and group like ubuntu
+sudo chown -R ubuntu:ubuntu /data
 
-    error_page 404 /404.html;
-    location /404 {
-      root /var/www/html;
-      internal;
-    }
-}" > /etc/nginx/sites-available/default
+## Add new configuration to NGINX
+sudo sed -i "/listen 80 default_server;/ a \\\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n" /etc/nginx/sites-available/default
 
-service nginx restart
+## Restart NGINX
+sudo service nginx restarti
