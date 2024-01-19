@@ -20,7 +20,7 @@ def hello_world():
 @app.route("/hbnb", strict_slashes=False)
 def hello_world2():
     """ returns a message on the hbnb extension """
-    return "HBNB!"
+    return "HBNB"
 
 
 @app.route("/c/<text>", strict_slashes=False)
@@ -34,7 +34,7 @@ def hello_world3(text):
 @app.route("/hbnb", strict_slashes=False)
 def hello_world4():
     """ returns a message on the hbnb extension """
-    return "HBNB!"
+    return "HBNB"
 
 
 if __name__ == "__main__":

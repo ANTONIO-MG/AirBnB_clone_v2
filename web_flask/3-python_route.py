@@ -4,7 +4,7 @@
 # web application listening on 0.0.0.0, port 5000
 # Routes:  "/"" display “Hello HBNB!”
 # /hbnb: display “HBNB”
-# python/<text>: display “Python ”, followed by the value of the text 
+# python/<text>: display “Python ”, followed by the value of the text
 # (replace underscore _ symbols with a space )
 # The default value of text is “is cool”
 # option strict_slashes=False in route definition
@@ -23,7 +23,7 @@ def hello_world():
 @app.route('/hbnb', strict_slashes=False)
 def hello_world2():
     """ returns a message on the hbnb extension """
-    return "HBNB!"
+    return "HBN"
 
 
 @app.route('/c/<text>', strict_slashes=False)
@@ -46,7 +46,7 @@ def hello_world5(text='is cool'):
 @app.route('/hbnb', strict_slashes=False)
 def hello_world4():
     """ returns a message on the hbnb extension """
-    return "HBNB!"
+    return "HBNB"
 
 
 if __name__ == "__main__":
